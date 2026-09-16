@@ -1,14 +1,18 @@
-public class SuperMarket {
-    Product bread;
-    Product fruit;
-    Product toiletPaper;
-    Product cheese;
+import java.util.ArrayList;
+import java.util.List;
 
-    public SuperMarket(Product bread, Product fruit, Product toiletPaper, Product cheese){
-        this.bread = bread;
-        this.fruit = fruit;
-        this.toiletPaper = toiletPaper;
-        this.cheese = cheese;
+public class SuperMarket {
+    List<Product> products;
+    String name;
+
+    public SuperMarket(List<Product> products, String name){
+        if (products != null){
+            this.products = products;
+        }
+        else {
+            this.products = new ArrayList<>();
+        }
+        this.name = name;
     }
 
     public void buyItem(Product product, int amount){
@@ -22,19 +26,16 @@ public class SuperMarket {
         }
     }
 
-    public void buyBread(int amount){
-        buyItem(this.bread, amount);
+    public void restockItem(String productName, int amount){
+        for (int i = 0; i < this.products.size(); i++) {
+            if (productName.equalsIgnoreCase(this.products.get(i).name)){
+                this.products.get(i).amount =+ amount;
+                return;
+            }
+            else{
+                System.out.println(this.products.get(i).name + " was not found, so it has not been restocked");
+            }
+        }
     }
 
-    public void buyFruit(int amount){
-        buyItem(this.fruit, amount);
-    }
-
-    public void buyCheese(int amount){
-        buyItem(this.cheese, amount);
-    }
-
-    public void buyToiletPaper(int amount){
-        buyItem(this.toiletPaper, amount);
-    }
 }

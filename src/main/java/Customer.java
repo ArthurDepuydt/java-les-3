@@ -14,17 +14,14 @@ public class Customer {
         if (this.superMarket == null){
             System.out.println("Select a supermarket to go to first");
         }
-        else if(productName.equals("bread")){
-            superMarket.buyBread(amount);
-        }
-        else if(productName.equals("fruit") ){
-            superMarket.buyFruit(amount);
-        }
-        else if(productName.equals("toiletPaper") ){
-            superMarket.buyToiletPaper(amount);
-        }
-        else if(productName.equals("cheese") ){
-            superMarket.buyCheese(amount);
+        else {
+            for (int i = 0; i < superMarket.products.size(); i++) {
+                if (superMarket.products.get(i).name.equalsIgnoreCase(productName)){
+                    superMarket.buyItem(superMarket.products.get(i), amount);
+                    return;
+                }
+            }
+            System.out.println(superMarket.name + " does not sell " + productName);
         }
     }
 }
